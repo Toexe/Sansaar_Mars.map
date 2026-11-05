@@ -1,0 +1,713 @@
+{
+  "orange": [
+    {
+      "name": "Olympus Mons",
+      "number": 1,
+      "lat": 18.65,
+      "lon": -133.8,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Arsia Mons",
+      "number": 2,
+      "lat": -8.35,
+      "lon": -121.0,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Pavonis Mons",
+      "number": 3,
+      "lat": 0.8,
+      "lon": -113.0,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Ascraeus Mons",
+      "number": 4,
+      "lat": 11.9,
+      "lon": -104.5,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Elysium Mons",
+      "number": 5,
+      "lat": 24.7,
+      "lon": 147.2,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Alba Mons",
+      "number": 6,
+      "lat": 40.5,
+      "lon": -110.0,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Hecates Tholus",
+      "number": 7,
+      "lat": 32.1,
+      "lon": 150.0,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Ceraunius Tholus",
+      "number": 8,
+      "lat": 24.0,
+      "lon": -97.30000000000001,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Uranius Mons",
+      "number": 9,
+      "lat": 26.5,
+      "lon": -93.0,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Apollinaris Mons",
+      "number": 10,
+      "lat": -8.5,
+      "lon": 174.5,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Tyrrhenus Mons",
+      "number": 11,
+      "lat": -21.5,
+      "lon": 106.5,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Hadriacus Mons",
+      "number": 12,
+      "lat": -31.0,
+      "lon": 92.0,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Biblis Tholus",
+      "number": 13,
+      "lat": 2.0,
+      "lon": -125.0,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Jovis Tholus",
+      "number": 14,
+      "lat": 18.0,
+      "lon": -115.0,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Zephyria Tholus",
+      "number": 15,
+      "lat": -20.0,
+      "lon": 153.0,
+      "category": "Volcanoes And Mountains"
+    },
+    {
+      "name": "Gale Crater",
+      "number": 16,
+      "lat": -5.4,
+      "lon": 137.4,
+      "category": "Craters"
+    },
+    {
+      "name": "Jezero Crater",
+      "number": 17,
+      "lat": 18.4,
+      "lon": 77.4,
+      "category": "Craters"
+    },
+    {
+      "name": "Gusev Crater",
+      "number": 18,
+      "lat": -14.6,
+      "lon": 175.3,
+      "category": "Craters"
+    },
+    {
+      "name": "Endeavour Crater",
+      "number": 19,
+      "lat": -2.3,
+      "lon": -5.5,
+      "category": "Craters"
+    },
+    {
+      "name": "Victoria Crater",
+      "number": 20,
+      "lat": -2.1,
+      "lon": -5.5,
+      "category": "Craters"
+    },
+    {
+      "name": "Eagle Crater",
+      "number": 21,
+      "lat": -1.95,
+      "lon": -5.5,
+      "category": "Craters"
+    },
+    {
+      "name": "Korolev Crater",
+      "number": 22,
+      "lat": 72.0,
+      "lon": 164.0,
+      "category": "Craters"
+    },
+    {
+      "name": "McLaughlin Crater",
+      "number": 23,
+      "lat": 21.9,
+      "lon": 22.5,
+      "category": "Craters"
+    },
+    {
+      "name": "Holden Crater",
+      "number": 24,
+      "lat": -26.0,
+      "lon": -34.0,
+      "category": "Craters"
+    },
+    {
+      "name": "Eberswalde Crater",
+      "number": 25,
+      "lat": -23.9,
+      "lon": -34.0,
+      "category": "Craters"
+    },
+    {
+      "name": "Schiaparelli Crater",
+      "number": 26,
+      "lat": -3.0,
+      "lon": 16.7,
+      "category": "Craters"
+    },
+    {
+      "name": "Herschel Crater",
+      "number": 27,
+      "lat": -14.9,
+      "lon": 128.0,
+      "category": "Craters"
+    },
+    {
+      "name": "Newton Crater",
+      "number": 28,
+      "lat": -41.0,
+      "lon": 158.0,
+      "category": "Craters"
+    },
+    {
+      "name": "Lyot Crater",
+      "number": 29,
+      "lat": 50.8,
+      "lon": 29.3,
+      "category": "Craters"
+    },
+    {
+      "name": "Tikhonravov Crater",
+      "number": 30,
+      "lat": 13.0,
+      "lon": -36.0,
+      "category": "Craters"
+    },
+    {
+      "name": "Miyamoto Crater",
+      "number": 31,
+      "lat": -2.0,
+      "lon": 7.0,
+      "category": "Craters"
+    },
+    {
+      "name": "Mojave Crater",
+      "number": 32,
+      "lat": 7.5,
+      "lon": -33.0,
+      "category": "Craters"
+    },
+    {
+      "name": "Becquerel Crater",
+      "number": 33,
+      "lat": 22.0,
+      "lon": 8.0,
+      "category": "Craters"
+    },
+    
+    {
+      "name": "Valles Marineris",
+      "number": 36,
+      "lat": -13.0,
+      "lon": -70.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Noctis Labyrinthus",
+      "number": 37,
+      "lat": -7.0,
+      "lon": -100.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Ares Vallis",
+      "number": 38,
+      "lat": 10.0,
+      "lon": -18.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Kasei Valles",
+      "number": 39,
+      "lat": 25.0,
+      "lon": -60.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Mawrth Vallis",
+      "number": 40,
+      "lat": 22.0,
+      "lon": -17.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Shalbatana Vallis",
+      "number": 41,
+      "lat": 4.0,
+      "lon": -44.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Ravi Vallis",
+      "number": 42,
+      "lat": -1.0,
+      "lon": -38.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Tiu Valles",
+      "number": 43,
+      "lat": 15.0,
+      "lon": -35.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Simud Valles",
+      "number": 44,
+      "lat": 12.0,
+      "lon": -34.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Mangala Valles",
+      "number": 45,
+      "lat": -11.0,
+      "lon": -147.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Nirgal Vallis",
+      "number": 46,
+      "lat": -27.0,
+      "lon": -43.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Nanedi Valles",
+      "number": 47,
+      "lat": 6.0,
+      "lon": -48.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Ma'adim Vallis",
+      "number": 48,
+      "lat": -21.0,
+      "lon": 177.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Reull Vallis",
+      "number": 49,
+      "lat": -41.0,
+      "lon": 101.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Uzboi Vallis",
+      "number": 50,
+      "lat": -29.0,
+      "lon": -37.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Dao Vallis",
+      "number": 51,
+      "lat": -39.0,
+      "lon": 95.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Harmakhis Vallis",
+      "number": 52,
+      "lat": -40.0,
+      "lon": 75.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Hebrus Valles",
+      "number": 53,
+      "lat": 21.0,
+      "lon": 126.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Hrad Vallis",
+      "number": 54,
+      "lat": 24.0,
+      "lon": 143.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Athabasca Valles",
+      "number": 55,
+      "lat": 9.0,
+      "lon": -156.0,
+      "category": "Valleys And Canyon Systems"
+    },
+    {
+      "name": "Hellas Planitia",
+      "number": 56,
+      "lat": -42.4,
+      "lon": 70.0,
+      "category": "Plains And Basins"
+    },
+    
+    {
+      "name": "Acidalia Planitia",
+      "number": 58,
+      "lat": 48.0,
+      "lon": -22.0,
+      "category": "Plains And Basins"
+    },
+    
+    {
+      "name": "Elysium Planitia",
+      "number": 60,
+      "lat": 2.0,
+      "lon": 154.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Amazonis Planitia",
+      "number": 61,
+      "lat": 24.0,
+      "lon": -158.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Arcadia Planitia",
+      "number": 62,
+      "lat": 46.0,
+      "lon": 176.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Isidis Planitia",
+      "number": 63,
+      "lat": 12.0,
+      "lon": 87.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Argyre Planitia",
+      "number": 64,
+      "lat": -49.0,
+      "lon": 42.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Vastitas Borealis",
+      "number": 65,
+      "lat": 75.0,
+      "lon": 0.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Meridiani Planum",
+      "number": 66,
+      "lat": -2.0,
+      "lon": 0.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Syrtis Major Planum",
+      "number": 67,
+      "lat": 8.0,
+      "lon": 69.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Lunae Planum",
+      "number": 68,
+      "lat": 15.0,
+      "lon": -65.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Solis Planum",
+      "number": 69,
+      "lat": -25.0,
+      "lon": -87.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Sinai Planum",
+      "number": 70,
+      "lat": -18.0,
+      "lon": -95.0,
+      "category": "Plains And Basins"
+    },
+    {
+      "name": "Tharsis",
+      "number": 71,
+      "lat": 2.0,
+      "lon": -110.0,
+      "category": "Regions And Highlands"
+    },
+    {
+      "name": "Arabia Terra",
+      "number": 72,
+      "lat": 10.0,
+      "lon": 25.0,
+      "category": "Regions And Highlands"
+    },
+    {
+      "name": "Noachis Terra",
+      "number": 73,
+      "lat": -45.0,
+      "lon": -10.0,
+      "category": "Regions And Highlands"
+    },
+    {
+      "name": "Terra Cimmeria",
+      "number": 74,
+      "lat": -40.0,
+      "lon": 150.0,
+      "category": "Regions And Highlands"
+    },
+    {
+      "name": "Terra Sirenum",
+      "number": 75,
+      "lat": -40.0,
+      "lon": -150.0,
+      "category": "Regions And Highlands"
+    },
+    {
+      "name": "Xanthe Terra",
+      "number": 76,
+      "lat": -5.0,
+      "lon": -48.0,
+      "category": "Regions And Highlands"
+    },
+    {
+      "name": "Margaritifer Terra",
+      "number": 77,
+      "lat": -15.0,
+      "lon": 25.0,
+      "category": "Regions And Highlands"
+    },
+    {
+      "name": "Tempe Terra",
+      "number": 78,
+      "lat": 40.0,
+      "lon": -75.0,
+      "category": "Regions And Highlands"
+    },
+    {
+      "name": "Promethei Terra",
+      "number": 79,
+      "lat": -65.0,
+      "lon": 60.0,
+      "category": "Regions And Highlands"
+    },
+    {
+      "name": "Tyrrhena Terra",
+      "number": 80,
+      "lat": -20.0,
+      "lon": 100.0,
+      "category": "Regions And Highlands"
+    },
+    {
+      "name": "Medusae Fossae",
+      "number": 81,
+      "lat": 3.0,
+      "lon": -170.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Cerberus Fossae",
+      "number": 82,
+      "lat": 10.0,
+      "lon": 164.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Elysium Fossae",
+      "number": 83,
+      "lat": 25.0,
+      "lon": 148.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Gordii Dorsum",
+      "number": 84,
+      "lat": 25.0,
+      "lon": -135.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Aeolis Mensae",
+      "number": 85,
+      "lat": 0.0,
+      "lon": 140.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Candor Chasma",
+      "number": 86,
+      "lat": -6.0,
+      "lon": -73.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Ophir Chasma",
+      "number": 87,
+      "lat": -4.0,
+      "lon": -72.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Melas Chasma",
+      "number": 88,
+      "lat": -9.0,
+      "lon": -69.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Coprates Chasma",
+      "number": 89,
+      "lat": -13.0,
+      "lon": -60.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Juventae Chasma",
+      "number": 90,
+      "lat": -4.5,
+      "lon": -63.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Ius Chasma",
+      "number": 91,
+      "lat": -8.0,
+      "lon": -84.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Ganges Chasma",
+      "number": 92,
+      "lat": -8.0,
+      "lon": -48.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Hebes Chasma",
+      "number": 93,
+      "lat": -1.0,
+      "lon": -74.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Hydraotes Chaos",
+      "number": 94,
+      "lat": -1.0,
+      "lon": -34.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Aram Chaos",
+      "number": 95,
+      "lat": 2.5,
+      "lon": -22.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Aureum Chaos",
+      "number": 96,
+      "lat": -4.0,
+      "lon": -27.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Iani Chaos",
+      "number": 97,
+      "lat": -2.0,
+      "lon": -18.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Galaxias Chaos",
+      "number": 98,
+      "lat": 34.0,
+      "lon": 141.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Abalos Undae",
+      "number": 99,
+      "lat": 78.0,
+      "lon": -77.0,
+      "category": "Other Geological Features"
+    },
+    {
+      "name": "Olympia Undae",
+      "number": 100,
+      "lat": 80.0,
+      "lon": 167.0,
+      "category": "Other Geological Features"
+    }
+  ],
+  "green": [
+    {
+      "name": "Gale Crater",
+      "lat": -5.4,
+      "lon": 137.4,
+      "category": "Measured environment — Curiosity / REMS / RAD",
+      "color": "green",
+      "details": "Curiosity landing region. Radiation: early-mission absorbed dose about 210 ± 40 µGy/day (first ~300 sols, Aug 2012–Jun 2013); observed values about 180–225 µGy/day. Dose-equivalent estimate (~640–650 µSv/day) is a different quantity. Indicative pressure: 700–900 Pa. Elevation: about −4,400 m. Dust-storm visibility estimates depend on the analysis; do not equate opacity directly with visibility."
+    },
+    {
+      "name": "Jezero Crater",
+      "lat": 18.4,
+      "lon": 77.4,
+      "category": "Environmental site — Perseverance / MEDA",
+      "color": "green",
+      "details": "Perseverance / MEDA site. Indicative pressure in the supplied comparison: about 600–800 Pa. The supplied file does not assert a comparable numeric radiation measurement here; Gale's Curiosity RAD value should not be reused."
+    },
+    {
+      "name": "Chryse Planitia (Viking 1 region)",
+      "lat": 25.0,
+      "lon": -40.0,
+      "category": "Environmental site — Viking 1",
+      "color": "green",
+      "details": "Viking 1 landing region. Early mean pressure: about 765 Pa during the first four sols. Early air temperature: about 188–244 K (−85 to −29 °C). Elevation: about −1,500 m."
+    },
+    {
+      "name": "Utopia Planitia (Viking 2 region)",
+      "lat": 49.7,
+      "lon": 118.0,
+      "category": "Environmental site — Viking 2",
+      "color": "green",
+      "details": "Viking 2 landing region. Elevation: about −3,000 m. The supplied comparison file does not provide other comparable numeric measurements for this location."
+    }
+  ]
+}
