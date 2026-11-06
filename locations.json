@@ -105,20 +105,7 @@
       "lon": 153.0,
       "category": "Volcanoes And Mountains"
     },
-    {
-      "name": "Gale Crater",
-      "number": 16,
-      "lat": -5.4,
-      "lon": 137.4,
-      "category": "Craters"
-    },
-    {
-      "name": "Jezero Crater",
-      "number": 17,
-      "lat": 18.4,
-      "lon": 77.4,
-      "category": "Craters"
-    },
+  
     {
       "name": "Gusev Crater",
       "number": 18,
