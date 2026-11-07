@@ -372,7 +372,7 @@ document.addEventListener('keydown',event=>{
  if(event.key==='Escape'&&mapWrap.classList.contains('fullscreen-fallback'))exitFallbackFullscreen();
 });
 renderList();
-
+}
 
 
 fetch('./locations.json')
