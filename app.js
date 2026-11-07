@@ -211,9 +211,18 @@ function renderList(q=''){
   const name=document.createElement('span'); name.className='label'; name.textContent=p.name;
   const small=document.createElement('small'); small.textContent=p.color==='green'?'ENVIRONMENT DATA':'MARS FEATURE';
   wrap.append(name,small); b.append(dot,wrap);
-  b.addEventListener('click',()=>{map.setView([p.lat,p.lon],Math.max(map.getZoom(),4),{animate:true});const entry=[...markers.values()].find(x=>x.data===p);if(entry)entry.marker.openPopup();});
-  list.appendChild(b);
+  b.addEventListener('click', () => {
+  map.setView([p.lat, p.lon], Math.max(map.getZoom(), 4), { animate: true });
+  const entry = [...markers.values()].find(x => x.data === p);
+  if (entry) entry.marker.openPopup();
+  if (p.extra) {
+    showQuoteSlider(p);
+  } else {
+    hideQuoteSlider();
+  }
  });
+
+});
  markers.forEach(({marker,data})=>{
   const show=`${data.name} ${data.category||''}`.toLowerCase().includes(q.toLowerCase());
   if(show){if(!map.hasLayer(marker))marker.addTo(map);}else map.removeLayer(marker);
