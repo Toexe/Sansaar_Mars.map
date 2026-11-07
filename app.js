@@ -373,7 +373,7 @@ document.addEventListener('keydown',event=>{
 });
 renderList();
 
-}
+
 
 fetch('./locations.json')
   .then(response => {
