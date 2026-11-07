@@ -235,7 +235,8 @@ all.forEach((p, i) => {
     } else {
       hideQuoteSlider();
     }
-  });
+    markers.set(i, { marker: m, data: p });
+});
 const list=document.getElementById('results-list'), search=document.getElementById('search'), count=document.getElementById('count');
 const fullscreenSearch=document.getElementById('fullscreen-search');
 const fullscreenSuggestions=document.getElementById('fullscreen-suggestions');
