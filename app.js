@@ -205,6 +205,55 @@ function renderList(q=''){
   if(show){if(!map.hasLayer(marker))marker.addTo(map);}else map.removeLayer(marker);
  });
 }
+const quoteSlider = document.getElementById('quote-slider');
+const sliderBadge = document.getElementById('slider-badge');
+const sliderMemberName = document.getElementById('slider-member-name');
+const sliderLocation = document.getElementById('slider-location');
+const sliderQuote = document.getElementById('slider-quote');
+const sliderClose = document.getElementById('slider-close');
+
+function getMemberInfo(rawMember) {
+  if (!rawMember) return null;
+  // If provided as an object: { id: 1, name: "Alice" }
+  if (typeof rawMember === 'object') {
+    const id = String(rawMember.id || 1).replace(/\D/g, '') || '1';
+    return { id, name: rawMember.name || `Member ${id}` };
+  }
+  // If provided as a string or number: e.g. "Member 1 - Alice" or 1
+  const str = String(rawMember);
+  const match = str.match(/\d/);
+  const id = match ? match[0] : '1';
+  const name = str.includes('-') ? str.split('-')[1].trim() : (str.startsWith('Member') ? str : `Member ${id}: ${str}`);
+  return { id, name };
+}
+
+function showQuoteSlider(point) {
+  if (!quoteSlider || !point.extra) {
+    if (quoteSlider) quoteSlider.classList.remove('open');
+    return;
+  }
+  const member = getMemberInfo(point.member) || { id: '1', name: 'Member 1' };
+
+  quoteSlider.setAttribute('data-member', member.id);
+  sliderBadge.textContent = `MEMBER ${member.id}`;
+  sliderMemberName.textContent = member.name;
+  sliderLocation.textContent = point.name;
+  sliderQuote.textContent = point.extra;
+
+  quoteSlider.classList.add('open');
+  quoteSlider.setAttribute('aria-hidden', 'false');
+}
+
+function hideQuoteSlider() {
+  if (!quoteSlider) return;
+  quoteSlider.classList.remove('open');
+  quoteSlider.setAttribute('aria-hidden', 'true');
+}
+
+if (sliderClose) {
+  sliderClose.addEventListener('click', hideQuoteSlider);
+}
+
 function goToPlace(place){
  if(!place)return;
  searchInputs.forEach(input=>input.value=place.name);
