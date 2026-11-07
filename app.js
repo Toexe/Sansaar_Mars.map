@@ -171,7 +171,8 @@ const all = [
  ...DATA.orange.map(x=>({...x,color:'orange',group:'Named feature'}))
 ];
 const markers = new Map();
-/* const quoteSlider = document.getElementById('quote-slider');
+  
+const quoteSlider = document.getElementById('quote-slider');
 const sliderBadge = document.getElementById('slider-badge');
 const sliderMemberName = document.getElementById('slider-member-name');
 const sliderLocation = document.getElementById('slider-location');
@@ -216,7 +217,7 @@ function hideQuoteSlider() {
 
 if (sliderClose) {
   sliderClose.addEventListener('click', hideQuoteSlider);
-} */
+} 
 function markerIcon(color){return L.divIcon({className:'custom-marker',html:`<span class="marker-core ${color}"></span>`,iconSize: [18,18],iconAnchor:[9,9]});}
 function popupHtml(p){
  const desc=p.details || `Approximate center of the named ${p.category || 'Mars'} feature. Coordinates are a map reference estimate, not a surveyed boundary.`;
@@ -252,7 +253,18 @@ function renderList(q=''){
   const name=document.createElement('span'); name.className='label'; name.textContent=p.name;
   const small=document.createElement('small'); small.textContent=p.color==='green'?'ENVIRONMENT DATA':'MARS FEATURE';
   wrap.append(name,small); b.append(dot,wrap);
-  b.addEventListener('click',()=>{map.setView([p.lat,p.lon],Math.max(map.getZoom(),4),{animate:true});const entry=[...markers.values()].find(x=>x.data===p);if(entry)entry.marker.openPopup();});
+  b.addEventListener('click', () => {
+  map.setView([p.lat, p.lon], Math.max(map.getZoom(), 4), { animate: true });
+  const entry = [...markers.values()].find(x => x.data === p);
+  if (entry) entry.marker.openPopup();
+  if (p.extra) {
+    showQuoteSlider(p);
+    
+    } else {
+    
+    hideQuoteSlider();
+    }
+  });
   list.appendChild(b);
  });
  markers.forEach(({marker,data})=>{
