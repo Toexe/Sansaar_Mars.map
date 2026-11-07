@@ -176,10 +176,19 @@ function popupHtml(p){
  const desc=p.details || `Approximate center of the named ${p.category || 'Mars'} feature. Coordinates are a map reference estimate, not a surveyed boundary.`;
  return `<div class="popup-title">${p.name}</div><div class="popup-kind" style="color:${p.color==='green'?'#4ee28a':'#ff963d'}">${p.category||p.group}</div><div class="popup-desc">${desc}</div><div class="popup-coord">Approx. ${p.lat.toFixed(2)}°, ${p.lon.toFixed(2)}°</div>`;
 }
-all.forEach((p,i)=>{
- const m=L.marker([p.lat,p.lon],{icon:markerIcon(p.color),title:p.name}).bindPopup(popupHtml(p));
- m.addTo(map); markers.set(p.name+(p.color==='green'?' [environment]':' [named]'),{marker:m,data:p});
-});
+all.forEach((p, i) => {
+  const m = L.marker([p.lat, p.lon], {
+    icon: markerIcon(p.color),
+    title: p.name
+  }).bindPopup(popupHtml(p));
+
+  m.on('click', () => {
+    if (p.extra) {
+      showQuoteSlider(p);
+    } else {
+      hideQuoteSlider();
+    }
+  });
 const list=document.getElementById('results-list'), search=document.getElementById('search'), count=document.getElementById('count');
 const fullscreenSearch=document.getElementById('fullscreen-search');
 const fullscreenSuggestions=document.getElementById('fullscreen-suggestions');
