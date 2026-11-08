@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mars Atlas — Interactive Surface Map</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div><div class="eyebrow">MARS MISSION / SURFACE INTELLIGENCE</div><h1>MARS ATLAS <span>01</span></h1></div>
+  <div class="status"><i></i> LIVE TILE BASEMAP</div>
+</header>
+<main>
+  <section class="toolbar">
+    <label class="search"><span>⌕</span><input id="search" type="text" inputmode="search" role="searchbox" placeholder="Search a crater, volcano, valley…" autocomplete="off"><button id="clear" aria-label="Clear search">×</button></label>
+    <div class="select-wrap">
+      <select id="layer-select" class="toolbtn select-tool" aria-label="Select Basemap">
+        <option value="celestia" selected>Mars Shaded (Celestia)</option>
+        <option value="opm">OpenPlanetaryMap</option>
+        <option value="mola">MOLA Color Elevation</option>
+        <option value="hillshade">Mars Hillshade</option>
+      </select>
+    </div>
+    <button class="toolbtn" id="reset">RESET VIEW</button>
+  </section>
+  <section class="legend">
+    <span><i class="dot green"></i> ENVIRONMENT SITES <b>11</b></span>
+    <span><i class="dot orange"></i> NAMED FEATURES <b>249 LIST ENTRIES</b></span>
+    <span class="hint">Tap a marker for details · pinch to zoom</span>
+  </section>
+  <section class="map-wrap">
+    <div id="map" aria-label="Interactive map of Mars"></div>
+    <div class="fullscreen-controls">
+      <div class="fullscreen-search">
+        <span aria-hidden="true">⌕</span>
+        <input id="fullscreen-search" type="text" inputmode="search" role="searchbox" placeholder="Search a crater, volcano, valley…" autocomplete="off" aria-label="Search locations" aria-controls="fullscreen-suggestions" aria-expanded="false">
+        <button id="fullscreen-clear" type="button" aria-label="Clear search">×</button>
+        <button id="fullscreen-submit" class="search-submit" type="button" aria-label="Go to matching location" title="Go to matching location">✓</button>
+        <div id="fullscreen-suggestions" class="fullscreen-suggestions" role="listbox" aria-label="Matching locations" hidden></div>
+      </div>
+      <button class="toolbtn fullscreen-toggle" id="fullscreen-toggle" type="button" aria-label="Enter fullscreen map">FULLSCREEN</button>
+    </div>
+    <div id="map-loading" class="map-loading" aria-live="polite" aria-busy="true">
+      <div class="loader"></div>
+      <div class="loading-title">LOADING MARS MAP</div>
+      <div class="loading-subtitle">Waiting for map tiles...</div>
+    </div>
+    <div class="map-compass" role="img" aria-label="Map directions: north up, east right, south down, west left">
+      <span class="compass-direction compass-north"><b>N</b><i>↑</i></span>
+      <span class="compass-direction compass-east"><b>E</b><i>→</i></span>
+      <span class="compass-direction compass-south"><b>S</b><i>↓</i></span>
+      <span class="compass-direction compass-west"><b>W</b><i>←</i></span>
+    </div>
+    <div class="map-note">BASEMAP: MARS SHADED SURFACE (CELESTIA) · FEATURES ARE APPROXIMATE CENTERS</div>
+    <!-- Team Member Quote Slide-over Drawer -->
+    <aside id="quote-slider" class="quote-slider" aria-hidden="true">
+      <button id="slider-close" class="slider-close" type="button" aria-label="Close quote drawer">×</button>
+      <div class="slider-header">
+        <span class="slider-badge" id="slider-badge">MEMBER</span>
+        <h3 class="slider-member-name" id="slider-member-name">Member Name</h3>
+      </div>
+      <div class="slider-location" id="slider-location">Location Name</div>
+      <div class="slider-body">
+        <label class="slider-label">TRANSMISSION / NOTE</label>
+        <blockquote class="slider-quote" id="slider-quote"></blockquote>
+      </div>
+    </aside>
+  </section>
+  <section class="results">
+    <div class="results-head"><h2>LOCATION INDEX</h2><span id="count">249 locations</span></div>
+    <div id="results-list" class="results-list"></div>
+  </section>
+</main>
+<footer>Research prototype · Marker coordinates are approximate and should be verified against the USGS–IAU Gazetteer before scientific navigation.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+if (typeof L === 'undefined') {
+  document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');
+}
+</script>
+<script src="app.js"></script>
+</body>
+</html>
