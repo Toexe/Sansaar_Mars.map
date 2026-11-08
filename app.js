@@ -208,7 +208,7 @@ function showQuoteSlider(point) {
   const member = getMemberInfo(point.member) || { id: '1', name: 'Member 1' };
 
   quoteSlider.setAttribute('data-member', member.id);
-  sliderBadge.textContent = 'MEMBER ' + member.id;
+  sliderBadge.textContent = 'MEMBER--';
   sliderMemberName.textContent = member.name;
   sliderLocation.textContent = point.name;
   sliderQuote.textContent = point.extra;
