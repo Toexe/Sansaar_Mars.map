@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mars Atlas — Interactive Surface Map</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<link rel="stylesheet" href="style.css?v=9">
+</head>
+<body>
+<header class="topbar">
+  <div><div class="eyebrow">MARS MISSION / SURFACE INTELLIGENCE</div><h1>MARS ATLAS <span>01</span></h1></div>
+  <div class="status"><i></i> LIVE TILE BASEMAP</div>
+</header>
+<main>
+  <section class="toolbar">
+    <label class="search"><span>⌕</span><input id="search" type="text" inputmode="search" role="searchbox" placeholder="Search a crater, volcano, valley…" autocomplete="off"><button id="clear" aria-label="Clear search">×</button></label>
+    <div class="select-wrap">
+      <select id="layer-select" class="toolbtn select-tool" aria-label="Select Basemap">
+        <option value="celestia" selected>Mars Shaded (Celestia)</option>
+        <option value="opm">OpenPlanetaryMap</option>
+        <option value="mola">MOLA Color Elevation</option>
+        <option value="hillshade">Mars Hillshade</option>
+      </select>
+    </div>
+    <button class="toolbtn" id="reset">RESET VIEW</button>
+</section>
+  <section class="legend">
+    <span><i class="dot green"></i> ENVIRONMENT SITES <b id="legend-green">11</b></span>
+    <span><i class="dot orange"></i> NAMED FEATURES <b id="legend-orange">239 LIST ENTRIES</b></span>
+    <span class="hint">Tap a marker for details · pinch to zoom</span>
+  </section>
+  <section class="map-wrap">
+    <div id="map" aria-label="Interactive map of Mars"></div>
+    <div class="fullscreen-controls">
+      <div class="fullscreen-search">
+        <span aria-hidden="true">⌕</span>
+        <input id="fullscreen-search" type="text" inputmode="search" role="searchbox" placeholder="Search a crater, volcano, valley…" autocomplete="off" aria-label="Search locations" aria-controls="fullscreen-suggestions" aria-expanded="false">
+        <button id="fullscreen-clear" type="button" aria-label="Clear search">×</button>
+        <button id="fullscreen-submit" class="search-submit" type="button" aria-label="Go to matching location" title="Go to matching location">✓</button>
+        <div id="fullscreen-suggestions" class="fullscreen-suggestions" role="listbox" aria-label="Matching locations" hidden></div>
+      </div>
+      <button class="toolbtn fullscreen-toggle" id="fullscreen-toggle" type="button" aria-label="Enter fullscreen map">FULLSCREEN</button>
+    </div>
+    <div id="map-loading" class="map-loading" aria-live="polite" aria-busy="true">
+      <div class="loader"></div>
+      <div class="loading-title">LOADING MARS MAP</div>
+      <div class="loading-subtitle">Waiting for map tiles...</div>
+    </div>
+    <div class="map-compass" role="img" aria-label="Map directions: north up, east right, south down, west left">
+      <span class="compass-direction compass-north"><b>N</b><i>↑</i></span>
+      <span class="compass-direction compass-east"><b>E</b><i>→</i></span>
+      <span class="compass-direction compass-south"><b>S</b><i>↓</i></span>
+      <span class="compass-direction compass-west"><b>W</b><i>←</i></span>
+    </div>
+    <div class="map-note">BASEMAP: MARS SHADED SURFACE (CELESTIA) · FEATURES ARE APPROXIMATE CENTERS</div>
+    <!-- Team Member Quote Slide-over Drawer -->
+    <aside id="quote-slider" class="quote-slider" aria-hidden="true">
+      <button id="slider-close" class="slider-close" type="button" aria-label="Close quote drawer">×</button>
+      <div class="slider-header">
+        <span class="slider-badge" id="slider-badge">MEMBER</span>
+        <h3 class="slider-member-name" id="slider-member-name">Member Name</h3>
+      </div>
+      <div class="slider-location" id="slider-location">Location Name</div>
+      <div class="slider-body">
+        <div class="slider-label">TRANSMISSION / NOTE</div>
+        <blockquote class="slider-quote" id="slider-quote"></blockquote>
+      </div>
+    </aside>
+  </section>
+  <section class="distance" id="distance">
+    <div class="distance-head"><h2>DISTANCE [For spacecraft use only]</h2><span class="distance-meta">ALTITUDE = 105.8 FROM DATUM | HAVERSINE · RADIUS = 3,500 KM</span></div>
+    <div class="distance-modes">
+      <button class="toolbtn" id="mode-name" type="button" aria-pressed="false">NAME</button>
+      <button class="toolbtn" id="mode-coord" type="button" aria-pressed="false">COORDINATES</button>
+    </div>
+    <form id="distance-form" class="distance-form" novalidate hidden>
+      <div class="distance-fields" id="fields-name">
+        <label>FROM<input id="from-name" list="place-names" type="text" autocomplete="off" placeholder="Pick from the location index"></label>
+        <label>TO<input id="to-name" list="place-names" type="text" autocomplete="off" placeholder="Pick from the location index"></label>
+      </div>
+      <div class="distance-fields coords" id="fields-coord" hidden>
+        <label>FROM LAT (°)<input id="from-lat" type="number" step="any" inputmode="decimal" placeholder="-90 to 90"></label>
+        <label>FROM LON (°)<input id="from-lon" type="number" step="any" inputmode="decimal" placeholder="-180 to 180"></label>
+        <label>TO LAT (°)<input id="to-lat" type="number" step="any" inputmode="decimal" placeholder="-90 to 90"></label>
+        <label>TO LON (°)<input id="to-lon" type="number" step="any" inputmode="decimal" placeholder="-180 to 180"></label>
+      </div>
+      <div class="distance-actions">
+        <button class="toolbtn" type="submit">CALCULATE</button>
+        <button class="toolbtn" type="button" id="distance-clear">CLEAR</button>
+      </div>
+    </form>
+    <datalist id="place-names"></datalist>
+    <div class="distance-result" id="distance-result" role="status" aria-live="polite" hidden>
+      <div class="dr-title" id="dr-title">SHORTEST DISTANCE</div>
+      <div class="dr-value" id="dr-value"></div>
+      <div class="dr-route" id="dr-route"></div>
+      <div class="dr-coords" id="dr-coords"></div>
+      <div class="dr-note" id="dr-note"></div>
+    </div>
+  </section>
+  <section class="results">
+    <div class="results-head"><h2>LOCATION INDEX</h2><span id="count">250 locations</span></div>
+    <div id="results-list" class="results-list"></div>
+  </section>
+</main>
+<footer>Research prototype · Marker coordinates are approximate and should be verified against the USGS–IAU Gazetteer before scientific navigation.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+if (typeof L === 'undefined') {
+  document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');
+}
+</script>
+<script src="app.js?v=9"></script>
+</body>
+</html>
