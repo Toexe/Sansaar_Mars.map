@@ -327,24 +327,6 @@ body.map-is-fullscreen { overflow: hidden; }
 .map-wrap:fullscreen .quote-slider,
 .map-wrap.fullscreen-fallback .quote-slider { top: var(--drawer-top); }
 
-/* Phones: drawer becomes a bottom sheet so the map and popup stay visible */
-@media (max-width: 640px) {
-  .quote-slider {
-    top: auto; left: 0; right: 0; bottom: var(--drawer-bottom);
-    width: auto; max-height: 280px; overflow-y: auto;
-    border-left: 0; border-top: 2px solid var(--line);
-    padding: 18px 16px calc(18px + env(safe-area-inset-bottom));
-    transform: translateY(105%);
-  }
-  .quote-slider.open { transform: translateY(0); }
-  .quote-slider[data-member="1"] { border-top-color: #ff4d4f; }
-  .quote-slider[data-member="2"] { border-top-color: #2f88ff; }
-  .quote-slider[data-member="3"] { border-top-color: #4ee28a; }
-  .quote-slider[data-member="4"] { border-top-color: #ffd600; }
-  .map-wrap:fullscreen .quote-slider,
-  .map-wrap.fullscreen-fallback .quote-slider { top: auto; }
-}
-
 /* Blinking seam lines between repeated worlds (OpenPlanetaryMap only) */
 .seam-line { animation: seam-blink 1.1s ease-in-out infinite; filter: drop-shadow(0 0 4px #ff963d); }
 @keyframes seam-blink { 0%, 100% { stroke-opacity: 1; } 50% { stroke-opacity: .12; } }
