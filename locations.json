@@ -6,11 +6,6 @@
       "lat": 18.65,
       "lon": -133.8,
       "category": "Volcanoes And Mountains",
-      "member": {
-        "id": 2,
-        "name": "Harshad"
-      },
-      "extra": "Olympus Mons is the largest shield volcano in the Solar System, rising over 21 km high!"
     },
     {
       "name": "Arsia Mons",
@@ -1325,6 +1320,11 @@
       "lat": 39.98,
       "lon": 17.8,
       "category": "Valleys And Canyon Systems"
+      "member": {
+        "id": 2,
+        "name": "Harshad"
+      },
+      "extra": "why don't they name it MEMERS VALLES"
     },
     {
       "name": "Marte Vallis",
@@ -1367,6 +1367,11 @@
       "lat": -4.21,
       "lon": 137.23,
       "category": "Valleys And Canyon Systems"
+      "member": {
+        "id": 2,
+        "name": "Har.sh..e̶x̶e̶had"
+      },
+      "extra": "There IT IS, Peace!... congrats for finding it "
     },
     {
       "name": "Eridania Planitia",
