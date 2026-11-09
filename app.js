@@ -301,7 +301,7 @@ function getMemberInfo(rawMember) {
   // Also accepted: {"id": 2, "name": "..."} or "Member 2 - Name" (older formats)
   if (typeof rawMember === 'number' || /^\d+$/.test(String(rawMember).trim())) {
     const id = String(rawMember).trim();
-    return { id, name: names[id] || ('Member ' + id) };
+    return { id, name: names[id] || ('Member ') };
   }
   if (typeof rawMember === 'object') {
     const id = String(rawMember.id || 1).replace(/\D/g, '') || '1';
