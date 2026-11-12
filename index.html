@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Nanum+Myeongjo&family=Oswald:wght@200..700&family=Outfit:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Redaction:ital,wght@0,400;0,700;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Martian Map — Interactive Mars Surface Intelligence</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+<link rel="stylesheet" href="style.css?v=13">
+</head>
+<body>
+
+<!-- =========================================================================
+     PAGE 1: MISSION INTRODUCTION (CLEAN DESKTOP & MOBILE VISION)
+     ========================================================================= -->
+<section id="page-intro" class="mission-page active" aria-label="Martian Map Introduction">
+  <div class="intro-hero-wrapper" id="intro-hero-wrapper">
+    <img src="mars-hero.jpg" alt="Mars planetary surface" class="intro-backdrop-img" id="intro-backdrop-img">
+    <div class="intro-gradient-overlay" aria-hidden="true"></div>
+    <div class="intro-ambient-glow" aria-hidden="true"></div>
+    <div class="intro-content-wrap">
+      <h1 class="intro-main-title">MARTIAN MAP</h1>
+      <p class="intro-app-desc">
+        Explore the Red Planet across 4 orbital basemaps, 250 geological landmarks, rover landing sites, and surface distance calculators.
+      </p>
+      
+      <div class="intro-dots" aria-hidden="true">We Hope you'll have fun while using our website and will enjoy alot<br>It was a great experience developing this project</div>
+      
+      <p class="intro-welcome-callout">
+        Welcome to the world of Martian maps. Press the button to start.
+      </p>
+
+      <button id="btn-get-started" class="btn-start-pill" type="button" aria-label="Start Mars Atlas experience">
+        <span>START</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Transition Portal Curtain -->
+<div id="transit-portal" class="transit-overlay-portal" aria-hidden="true">
+  <div class="transit-portal-ring"></div>
+</div>
+
+<!-- =========================================================================
+     PAGE 2: SIMULATED MISSION LOADING / BUFFERING SCREEN
+     - Background: Mars & Space pictures
+     - Top-Middle: Rotating Scientific Facts (fact.json)
+     - Middle: Single Easter egg line on top of the Loading Bar
+     ========================================================================= -->
+<section id="page-loading" class="mission-page" aria-label="Simulated Mission Loading Screen" hidden>
+  <!-- Mars & Space Background Imagery for Buffering -->
+  <div class="loading-bg-layer" aria-hidden="true">
+    <img id="loading-bg-1" src="mars-orbit-space.jpg" alt="" class="loading-bg-img active-bg">
+    <img id="loading-bg-2" src="mars-canyon-cosmos.jpg" alt="" class="loading-bg-img">
+    <div class="loading-bg-vignette"></div>
+  </div>
+
+  <div class="loading-stage-wrapper">
+    <!-- Top-Middle: Rotating Scientific Facts from fact.json -->
+    <div id="fact-container" class="fact-top-middle-box" aria-live="polite" aria-label="Rotating scientific facts">
+      <span id="fact-category" class="fact-category-pill">MARS SCIENCE</span>
+      <p id="fact-text" class="fact-quote-body">Retrieving scientific facts from fact.json...</p>
+    </div>
+
+    <!-- Middle: Easter Egg Single Line on top + Loading Bar in the middle -->
+    <div class="loading-middle-center">
+      <p class="easter-egg-single-line">There is an Easter egg. Can you find it?</p>
+
+      <div class="loading-progress-box">
+        <div class="progress-info-row">
+          <span class="progress-info-label">INITIALIZING MISSION...</span>
+          <div id="loading-percent" class="progress-digits" aria-live="polite">0%</div>
+        </div>
+
+        <div class="progress-bar-slot" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Mission initialization progress bar">
+          <div id="loading-progress-bar" class="progress-bar-runner" style="width: 0%;"></div>
+        </div>
+
+        <div id="loading-status-text" class="loading-ticker-text" role="status" aria-live="polite">CALIBRATING ORBITAL SENSORS...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================================
+     PAGE 3: EXISTING INTERACTIVE MAP (100% PRESERVED, NO EXTRA BUTTONS)
+     ========================================================================= -->
+<section id="page-map" class="mission-page" aria-label="Interactive Surface Map" hidden>
+<header class="topbar">
+  <div><div class="eyebrow">MARS MAP</div><h1>SANSAAR'S MAP<span>MARS</span></h1></div>
+  <div class="status"><i></i>BASEMAP ONLINE</div>
+</header>
+<main>
+  <section class="toolbar">
+    <label class="search"><span>⌕</span><input id="search" type="text" inputmode="search" role="searchbox" placeholder="Search a crater, volcano, valley…" autocomplete="off"><button id="clear" aria-label="Clear search">×</button></label>
+    <div class="select-wrap">
+      <select id="layer-select" class="toolbtn select-tool" aria-label="Select Basemap">
+        <option value="celestia" selected>Mars Shaded (Celestia)</option>
+        <option value="opm">OpenPlanetaryMap</option>
+        <option value="mola">MOLA Color Elevation</option>
+        <option value="hillshade">Mars Hillshade</option>
+      </select>
+    </div>
+    <button class="toolbtn" id="reset">RESET VIEW</button>
+</section>
+  <section class="legend">
+    <span><i class="dot green"></i> ENVIRONMENT SITES <b id="legend-green">11</b></span>
+    <span><i class="dot orange"></i> NAMED FEATURES <b id="legend-orange">239 LIST ENTRIES</b></span>
+    <span class="hint">Choose a map above • Tap a marker for details • pinch to zoom</span>
+  </section>
+  <section class="map-wrap">
+    <div id="map" aria-label="Interactive map of Mars"></div>
+    <div class="fullscreen-controls">
+      <div class="fullscreen-search">
+        <span aria-hidden="true">⌕</span>
+        <input id="fullscreen-search" type="text" inputmode="search" role="searchbox" placeholder="Search a crater, volcano, valley…" autocomplete="off" aria-label="Search locations" aria-controls="fullscreen-suggestions" aria-expanded="false">
+        <button id="fullscreen-clear" type="button" aria-label="Clear search">×</button>
+        <button id="fullscreen-submit" class="search-submit" type="button" aria-label="Go to matching location" title="Go to matching location">✓</button>
+        <div id="fullscreen-suggestions" class="fullscreen-suggestions" role="listbox" aria-label="Matching locations" hidden></div>
+      </div>
+      <button class="toolbtn fullscreen-toggle" id="fullscreen-toggle" type="button" aria-label="Enter fullscreen map">FULLSCREEN</button>
+    </div>
+    <div id="map-loading" class="map-loading" aria-live="polite" aria-busy="true">
+      <div class="loader"></div>
+      <div class="loading-title">LOADING MARS MAP</div>
+      <div class="loading-subtitle">Waiting for map tiles...</div>
+    </div>
+    <div class="map-compass" role="img" aria-label="Map directions: north up, east right, south down, west left">
+      <span class="compass-direction compass-north"><b>N</b><i>↑</i></span>
+      <span class="compass-direction compass-east"><b>E</b><i>→</i></span>
+      <span class="compass-direction compass-south"><b>S</b><i>↓</i></span>
+      <span class="compass-direction compass-west"><b>W</b><i>←</i></span>
+    </div>
+    <div class="map-note">BASEMAP: MARS SHADED SURFACE (CELESTIA) · FEATURES ARE APPROXIMATE CENTERS</div>
+    <!-- Team Member Quote Slide-over Drawer -->
+    <aside id="quote-slider" class="quote-slider" aria-hidden="true">
+      <button id="slider-close" class="slider-close" type="button" aria-label="Close quote drawer">×</button>
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #ff963d; margin-top: 4px;">NOW YOU ARE IN MEMBERS SPECIAL</div>
+      <div class="slider-header">
+        <span class="slider-badge" id="slider-badge"></span>
+        <h3 class="slider-member-name" id="slider-member-name">Member Name</h3>
+      </div>
+      <div class="slider-location" id="slider-location">Location Name</div>
+      <div class="slider-body">
+        <div class="slider-label">MEMBERS OPINION</div>
+        <blockquote class="slider-quote" id="slider-quote"></blockquote>
+      </div>
+    </aside>
+  </section>
+  <section class="distance" id="distance">
+    <div class="distance-head"><h2>DISTANCE [For spacecraft use only]</h2><span class="distance-meta">ALTITUDE = 105.8 FROM DATUM | HAVERSINE · RADIUS = 3,501.99 KM (take the values as approximations)</span></div>
+    <div class="distance-modes">
+      <button class="toolbtn" id="mode-name" type="button" aria-pressed="false">NAME</button>
+      <button class="toolbtn" id="mode-coord" type="button" aria-pressed="false">COORDINATES</button>
+    </div>
+    <form id="distance-form" class="distance-form" novalidate hidden>
+      <div class="distance-fields" id="fields-name">
+        <label>FROM<input id="from-name" list="place-names" type="text" autocomplete="off" placeholder="Pick from the location index"></label>
+        <label>TO<input id="to-name" list="place-names" type="text" autocomplete="off" placeholder="Pick from the location index"></label>
+      </div>
+      <div class="distance-fields coords" id="fields-coord" hidden>
+        <label>FROM LAT (°)<input id="from-lat" type="number" step="any" inputmode="decimal" placeholder="-90 to 90"></label>
+        <label>FROM LON (°)<input id="from-lon" type="number" step="any" inputmode="decimal" placeholder="-180 to 180"></label>
+        <label>TO LAT (°)<input id="to-lat" type="number" step="any" inputmode="decimal" placeholder="-90 to 90"></label>
+        <label>TO LON (°)<input id="to-lon" type="number" step="any" inputmode="decimal" placeholder="-180 to 180"></label>
+      </div>
+      <div class="distance-actions">
+        <button class="toolbtn" type="submit">CALCULATE</button>
+        <button class="toolbtn" type="button" id="distance-clear">CLEAR</button>
+      </div>
+    </form>
+    <datalist id="place-names"></datalist>
+    <div class="distance-result" id="distance-result" role="status" aria-live="polite" hidden>
+      <div class="dr-title" id="dr-title">SHORTEST DISTANCE</div>
+      <div class="dr-value" id="dr-value"></div>
+      <div class="dr-route" id="dr-route"></div>
+      <div class="dr-coords" id="dr-coords"></div>
+      <div class="dr-note" id="dr-note"></div>
+    </div>
+  </section>
+  <section class="results">
+    <div class="results-head"><h2>LOCATION INDEX</h2><span id="count">250 locations</span></div>
+    <div id="results-list" class="results-list"></div>
+  </section>
+</main>
+<footer>Research prototype · Marker coordinates are approximate and should be verified against the USGS–IAU Gazetteer before scientific navigation.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+if (typeof L === 'undefined') {
+  document.write('<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"><\/script>');
+}
+</script>
+<script src="app.js?v=9"></script>
+</body>
+</html>
