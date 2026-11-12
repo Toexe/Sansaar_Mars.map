@@ -1,0 +1,64 @@
+{
+  "facts": [
+    {
+      "id": 1,
+      "category": "Atmosphere and Weather",
+      "fact": "Mars has an extremely thin atmosphere, about 0.6% of Earth's surface pressure, consisting of approximately 95% carbon dioxide. Global dust storms can engulf the entire planet and last for months."
+    },
+    {
+      "id": 2,
+      "category": "Ancient Water",
+      "fact": "Mars once had liquid water on its surface, including possible oceans covering a significant portion of the northern hemisphere, rivers, lakes, and deltas. Evidence includes ancient shorelines, river channels, and minerals that form only in water."
+    },
+    {
+      "id": 3,
+      "category": "Water",
+      "fact": "Today, water exists mainly as ice in the polar caps and underground. There is also evidence of possible liquid water kept liquid by salts deep beneath the surface and occasional seasonal briny flows."
+    },
+    {
+      "id": 4,
+      "category": "Climate",
+      "fact": "Polar ice caps grow and shrink dramatically with the seasons. During winter, a significant portion of the atmosphere's carbon dioxide freezes out onto the poles."
+    },
+    {
+      "id": 5,
+      "category": "Gravity",
+      "fact": "Mars has approximately 38% of Earth's gravity. A person weighing 100 lb (45 kg) on Earth would weigh roughly 38 lb (17 kg) on Mars and could jump much higher."
+    },
+    {
+      "id": 6,
+      "category": "Geography",
+      "fact": "Olympus Mons is the tallest known volcano and mountain in the solar system. It rises approximately 22–25 km (13.6–16 miles) high, roughly 2.5–3 times the height of Mount Everest. Its enormous base is comparable in area to the state of Arizona or France."
+    },
+    {
+      "id": 7,
+      "category": "Geography",
+      "fact": "Valles Marineris is the largest canyon system in the solar system. It stretches approximately 4,000 km (2,500 miles) and reaches depths of up to 7–10 km (4–7 miles). It is far longer, wider, and deeper than Earth's Grand Canyon."
+    },
+    {
+      "id": 8,
+      "category": "Geography",
+      "fact": "Mars has a dramatic north-south geological difference. The northern hemisphere consists mostly of low-lying, relatively smooth plains, while the southern hemisphere contains heavily cratered highlands. The average elevation difference is approximately 5 km."
+    },
+    {
+      "id": 9,
+      "category": "Moons",
+      "fact": "Mars has two tiny, irregularly shaped moons named Phobos (fear) and Deimos (terror), after figures associated with the Greek god of war. Phobos orbits so close and fast that it rises in the west and sets in the east about three times during a Martian day."
+    },
+    {
+      "id": 10,
+      "category": "Time",
+      "fact": "A Martian day, called a sol, lasts 24 hours, 39 minutes, and 35 seconds. A Martian year lasts approximately 687 Earth days or 669 sols, nearly twice as long as an Earth year."
+    },
+    {
+      "id": 11,
+      "category": "Atmosphere and Weather",
+      "fact": "The Martian sky often appears pinkish or butterscotch during the day because of fine dust particles. Sunsets can appear blue near the horizon, opposite to Earth's reddish sunsets."
+    },
+    {
+      "id": 12,
+      "category": "Surface and Composition",
+      "fact": "Mars gets its famous red color from iron oxide (rust) in its surface dust. Beneath a thin oxidized layer, the soil is often bluish-gray. Recent research suggests that ferrihydrite, an iron oxide mineral, formed in the presence of water."
+    }
+  ]
+}
