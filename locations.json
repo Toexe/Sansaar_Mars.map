@@ -26,8 +26,12 @@
       "name": "skade_x90",
       "notes": [
         {
-          "location": "Valles Marineris",
-          "note": "Valles Marineris is a colossal canyon system stretching over 4,000 km across Mars."
+          "location": "Darwin Crater",
+          "note": "Hello monkies 🐒 how you doin"
+        },
+         {
+           "location": "Peace Vallis"
+           "note": "Somewhere in this World there will always be peace"
         }
       ]
     },
