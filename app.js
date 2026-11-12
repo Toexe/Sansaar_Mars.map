@@ -1,6 +1,243 @@
-let DATA = {};
+// ============================================================================
+// MARTIAN MAP — THREE-STAGE EXPERIENCE WITH INTERACTIVE TRANSITIONS
+// ============================================================================
 
+const SIMULATED_LOADING_DURATION_MS = 5500; // Simulated loading duration (ms)
+const FACT_ROTATION_INTERVAL_MS = 1800;     // Rotate scientific facts interval (ms)
+
+let missionFacts = [];
+let factHistory = [];
+let factRotationTimer = null;
+let loadingProgressTimer = null;
+
+let mapInitialized = false;
+let currentMap = null;
+let DATA = {};
 const MAP_MAX_ZOOM = 7;
+
+// ----------------------------------------------------------------------------
+// FACT DATABASE RETRIEVAL & RUNTIME RANDOM SELECTION (fact.json)
+// ----------------------------------------------------------------------------
+async function fetchFactDatabase() {
+  try {
+    const res = await fetch('./fact.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+    const data = await res.json();
+    if (data && Array.isArray(data.facts) && data.facts.length > 0) {
+      missionFacts = data.facts;
+      console.log(`[Fact Archive] Loaded ${missionFacts.length} facts from fact.json`);
+    } else {
+      throw new Error('fact.json contains no valid facts array');
+    }
+  } catch (err) {
+    console.warn('[Fact Archive] Using fallback or handling missing fact.json gracefully:', err);
+    if (typeof FALLBACK_FACTS_DATA !== 'undefined' && FALLBACK_FACTS_DATA && Array.isArray(FALLBACK_FACTS_DATA.facts)) {
+      missionFacts = FALLBACK_FACTS_DATA.facts;
+    } else {
+      missionFacts = [];
+    }
+  }
+}
+
+function getNextRandomFact() {
+  if (!missionFacts || missionFacts.length === 0) {
+    return {
+      id: 0,
+     category: 'FILE MISSING',
+      fact: 'file not found or empty: fact.json',
+    };
+  }
+
+  if (missionFacts.length === 1) return missionFacts[0];
+
+  // Avoid immediately displaying recently shown facts
+  let candidates = missionFacts.filter(item => !factHistory.includes(item.id));
+  if (candidates.length === 0) {
+    const lastId = factHistory[factHistory.length - 1];
+    factHistory = [lastId];
+    candidates = missionFacts.filter(item => item.id !== lastId);
+  }
+
+  const selectedIndex = Math.floor(Math.random() * candidates.length);
+  const selectedFact = candidates[selectedIndex];
+
+  factHistory.push(selectedFact.id);
+  const maxHistory = Math.min(missionFacts.length - 1, 5);
+  while (factHistory.length > maxHistory) {
+    factHistory.shift();
+  }
+
+  return selectedFact;
+}
+
+function displayRandomFact(animate = true) {
+  const fact = getNextRandomFact();
+  const categoryEl = document.getElementById('fact-category');
+  const textEl = document.getElementById('fact-text');
+  const containerEl = document.getElementById('fact-container');
+
+  if (!categoryEl || !textEl) return;
+
+  if (animate && containerEl) {
+    containerEl.classList.add('fact-fade-out');
+    setTimeout(() => {
+      categoryEl.textContent = (fact.category || 'SCIENCE ARCHIVE').toUpperCase();
+      textEl.textContent = fact.fact;
+      containerEl.classList.remove('fact-fade-out');
+      containerEl.classList.add('fact-fade-in');
+      setTimeout(() => {
+        containerEl.classList.remove('fact-fade-in');
+      }, 300);
+    }, 200);
+  } else {
+    categoryEl.textContent = (fact.category || 'SCIENCE ARCHIVE').toUpperCase();
+    textEl.textContent = fact.fact;
+  }
+}
+
+// ----------------------------------------------------------------------------
+// SIMULATED LOADING PROCESS & TIMER CLEANUP
+// ----------------------------------------------------------------------------
+function stopSimulatedLoading() {
+  if (loadingProgressTimer) {
+    clearInterval(loadingProgressTimer);
+    loadingProgressTimer = null;
+  }
+  if (factRotationTimer) {
+    clearInterval(factRotationTimer);
+    factRotationTimer = null;
+  }
+}
+
+function startSimulatedLoading() {
+  stopSimulatedLoading();
+
+  const progressBar = document.getElementById('loading-progress-bar');
+  const percentText = document.getElementById('loading-percent');
+  const statusTicker = document.getElementById('loading-status-text');
+  const bg1 = document.getElementById('loading-bg-1');
+  const bg2 = document.getElementById('loading-bg-2');
+
+  if (progressBar) progressBar.style.width = '0%';
+  if (percentText) percentText.textContent = '0%';
+  if (statusTicker) statusTicker.textContent = 'CALIBRATING ORBITAL SENSORS...';
+  if (bg1) bg1.classList.add('active-bg');
+  if (bg2) bg2.classList.remove('active-bg');
+
+  // Display initial fact immediately
+  displayRandomFact(false);
+
+  // Set up rotating facts at configured interval
+  factRotationTimer = setInterval(() => {
+    displayRandomFact(true);
+  }, FACT_ROTATION_INTERVAL_MS);
+
+  // Start progress bar timer
+  const startTime = performance.now();
+  const tickIntervalMs = 35;
+
+  loadingProgressTimer = setInterval(() => {
+    const elapsed = performance.now() - startTime;
+    const progress = Math.min(100, Math.floor((elapsed / SIMULATED_LOADING_DURATION_MS) * 100));
+
+    if (progressBar) {
+      progressBar.style.width = `${progress}%`;
+      progressBar.setAttribute('aria-valuenow', progress);
+    }
+    if (percentText) {
+      percentText.textContent = `${progress}%`;
+    }
+
+    // Crossfade space background image midway through buffering
+    if (progress >= 50 && bg1 && bg2 && !bg2.classList.contains('active-bg')) {
+      bg1.classList.remove('active-bg');
+      bg2.classList.add('active-bg');
+    }
+
+    if (statusTicker) {
+      if (progress < 25) {
+        statusTicker.textContent = 'CALIBRATING ORBITAL TELEMETRY & ATTITUDE SENSORS...';
+      } else if (progress < 50) {
+        statusTicker.textContent = 'ESTABLISHING SECURE DEEP SPACE NETWORK LINK...';
+      } else if (progress < 75) {
+        statusTicker.textContent = 'DOWNLINKING TOPOGRAPHIC & SURFACE ELEVATION DATA...';
+      } else if (progress < 95) {
+        statusTicker.textContent = 'SYNCHRONIZING 250 MARTIAN GEOSPATIAL VECTORS...';
+      } else {
+        statusTicker.textContent = 'MISSION INITIALIZATION COMPLETE · ACCESSING ATLAS';
+      }
+    }
+
+    if (progress >= 100) {
+      stopSimulatedLoading();
+      setTimeout(() => {
+        navigateToPage('page-map');
+      }, 400);
+    }
+  }, tickIntervalMs);
+}
+
+// ----------------------------------------------------------------------------
+// INTERACTIVE TRANSITION & NAVIGATION CONTROLLER
+// ----------------------------------------------------------------------------
+function initiateInteractiveLaunch() {
+  const introPage = document.getElementById('page-intro');
+  const portal = document.getElementById('transit-portal');
+
+  if (introPage) introPage.classList.add('transit-active');
+  if (portal) portal.classList.add('active');
+
+  setTimeout(() => {
+    navigateToPage('page-loading');
+    startSimulatedLoading();
+    if (portal) {
+      setTimeout(() => portal.classList.remove('active'), 250);
+    }
+  }, 480);
+}
+
+function navigateToPage(targetPageId) {
+  const pages = ['page-intro', 'page-loading', 'page-map'];
+  pages.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (id === targetPageId) {
+      el.hidden = false;
+      el.classList.add('active');
+    } else {
+      el.hidden = true;
+      el.classList.remove('active');
+    }
+  });
+
+  const introPage = document.getElementById('page-intro');
+  if (targetPageId === 'page-intro' && introPage) {
+    introPage.classList.remove('transit-active');
+  }
+
+  if (targetPageId !== 'page-loading') {
+    stopSimulatedLoading();
+  }
+
+  if (targetPageId === 'page-map') {
+    onEnterMapPage();
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function onEnterMapPage() {
+  if (!mapInitialized && Object.keys(DATA).length > 0) {
+    initializeMap();
+    mapInitialized = true;
+  }
+  if (currentMap) {
+    setTimeout(() => {
+      currentMap.invalidateSize({ pan: false });
+    }, 150);
+  }
+}
+
 
 const BASEMAPS = {
   celestia: {
@@ -80,6 +317,7 @@ function initializeMap() {
   zoomDelta: 1
 }).setView([8, 0], 2);
 L.control.zoom({ position: 'bottomleft' }).addTo(map);
+currentMap = map;
 
 let currentTileLayer = null;
 let pendingTileLayer = null;
@@ -305,7 +543,7 @@ function getMemberInfo(rawMember) {
   }
   if (typeof rawMember === 'object') {
     const id = String(rawMember.id || 1).replace(/\D/g, '') || '1';
-    return { id, name: names[id] || rawMember.name || ('Member ' + id) };
+    return { id, name: names[id] || rawMember.name || ('Member ' ) };
   }
   const str = String(rawMember);
   const match = str.match(/\d+/);
@@ -320,7 +558,7 @@ function showQuoteSlider(point) {
   const member = getMemberInfo(point.member) || { id: '1', name: 'Member 1' };
 
   quoteSlider.setAttribute('data-member', member.id);
-  sliderBadge.textContent = 'MEMBER ' + member.id;
+  sliderBadge.textContent = 'MEMBER ';
   sliderMemberName.textContent = member.name;
   sliderMemberName.hidden = /^member\s*\d+$/i.test(member.name.trim());
   sliderLocation.textContent = point.name;
@@ -503,7 +741,7 @@ document.addEventListener('keydown',event=>{
 renderList();
 
 // ---------- Distance tool: haversine, radius = 3,500 km ----------
-const MARS_RADIUS_KM = 3500;
+const MARS_RADIUS_KM = 3501.99;
 const rad = d => d * Math.PI / 180;
 function haversineKm(lat1, lon1, lat2, lon2) {
   const dLat = rad(lat2 - lat1), dLon = rad(lon2 - lon1);
@@ -614,24 +852,79 @@ if (distForm) {
 
 }
 
-fetch('./locations.json', { cache: 'no-store' })
-  .then(response => {
-    if (!response.ok) throw new Error('Could not load locations.json');
-    return response.json();
-  })
-  .then(data => {
-    if (!data || !Array.isArray(data.green) || !Array.isArray(data.orange)) {
-      throw new Error('locations.json must contain green and orange arrays');
-    }
-    DATA = applyMemberNotes(data);
-    initializeMap();
-  })
-  .catch(error => {
-    console.error('Location data error:', error);
-    const loading = document.getElementById('map-loading');
-    if (loading) {
-      loading.classList.add('active');
-      loading.querySelector('.loading-title').textContent = 'LOCATION DATA ERROR';
-      loading.querySelector('.loading-subtitle').textContent = 'Check locations.json and run this site using a local server.';
-    }
-  });
+
+// ----------------------------------------------------------------------------
+// LOCATION DATA FETCHING & MAP STARTUP
+// ----------------------------------------------------------------------------
+function fetchLocationsData() {
+  fetch('./locations.json', { cache: 'no-store' })
+    .then(response => {
+      if (!response.ok) throw new Error('Could not load locations.json: ' + response.status);
+      return response.json();
+    })
+    .then(data => {
+      if (!data || !Array.isArray(data.green) || !Array.isArray(data.orange)) {
+        throw new Error('locations.json must contain green and orange arrays');
+      }
+      DATA = applyMemberNotes(data);
+      const pageMap = document.getElementById('page-map');
+      if (pageMap && !pageMap.hidden && !mapInitialized) {
+        initializeMap();
+        mapInitialized = true;
+      }
+    })
+    .catch(error => {
+      console.warn('Location data fetch note:', error);
+      if (typeof FALLBACK_LOCATIONS_DATA !== 'undefined' && FALLBACK_LOCATIONS_DATA && FALLBACK_LOCATIONS_DATA.green) {
+        DATA = applyMemberNotes(FALLBACK_LOCATIONS_DATA);
+        const pageMap = document.getElementById('page-map');
+        if (pageMap && !pageMap.hidden && !mapInitialized) {
+          initializeMap();
+          mapInitialized = true;
+        }
+        return;
+      }
+      const loading = document.getElementById('map-loading');
+      if (loading) {
+        loading.classList.add('active');
+        loading.querySelector('.loading-title').textContent = 'LOCATION DATA ERROR';
+        loading.querySelector('.loading-subtitle').textContent = 'Check locations.json and run this site using a local server.';
+      }
+    });
+}
+
+// ----------------------------------------------------------------------------
+// DOM EVENT WIRING & INITIALIZATION
+// ----------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+  // Pre-load fact database from fact.json
+  fetchFactDatabase();
+
+  // Pre-load location data from locations.json
+  fetchLocationsData();
+
+  // Primary Interaction Button: START
+  const getStartedBtn = document.getElementById('btn-get-started');
+  if (getStartedBtn) {
+    getStartedBtn.addEventListener('click', () => {
+      initiateInteractiveLaunch();
+    });
+  }
+
+  // Subtle interactive desktop parallax on the Mars intro hero
+  const heroWrapper = document.getElementById('intro-hero-wrapper');
+  const backdropImg = document.getElementById('intro-backdrop-img');
+  if (heroWrapper && backdropImg) {
+    heroWrapper.addEventListener('mousemove', (e) => {
+      const rect = heroWrapper.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width - 0.5) * -18;
+      const y = ((e.clientY - rect.top) / rect.height - 0.5) * -12;
+      backdropImg.style.setProperty('--parallax-x', `${x.toFixed(1)}px`);
+      backdropImg.style.setProperty('--parallax-y', `${y.toFixed(1)}px`);
+    });
+    heroWrapper.addEventListener('mouseleave', () => {
+      backdropImg.style.setProperty('--parallax-x', '0px');
+      backdropImg.style.setProperty('--parallax-y', '0px');
+    });
+  }
+});
