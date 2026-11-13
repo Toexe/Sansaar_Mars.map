@@ -65,7 +65,12 @@
         {
           "location":"Beer Crater",
           "note":"Beer is like Wi-Fi everyone looks for a strong connection"
-        }
+        },
+        {
+          "location":"Siton Undae",
+          "note":"I sat on undae (eggs) for five minutes now even the chicken is calling me Mummy!"
+        },
+        {}
       ]
     }
   },
